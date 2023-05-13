@@ -2,14 +2,32 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [counter, setValue] = useState(0);
+  const [keyword, setKeyword] = useState("");
+
   const incrementCounter = () => setValue((prev) => prev + 1);
-  console.log("i run all the time");
+  const searchKeyword = (event) => setKeyword(event.target.value);
+
   useEffect(() => {
-    console.log("CALL THE API...");
-  }, []); //state가 바뀌었을때 이 코드가 실행되지 않게 하려면?? => useEffect 사용!!
+    console.log("I run only once.");
+  }, []);
+  useEffect(() => {
+    console.log("I run when 'keyword' changes.");
+  }, [keyword]);
+  useEffect(() => {
+    console.log("I run when 'counter' changes.");
+  }, [counter]);
+  useEffect(() => {
+    console.log("I run when keyword & counter change");
+  }, [keyword, counter]);
 
   return (
     <div>
+      <input
+        value={keyword}
+        onChange={searchKeyword}
+        type="text"
+        placeholder="Search here..."
+      />
       <h1>{counter}</h1>
       <button onClick={incrementCounter}>click me</button>
     </div>
