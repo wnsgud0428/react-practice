@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [amount, setAmount] = useState(0);
-  const [flipped, setFlipped] = useState(false);
+  const [inverted, setFlipped] = useState(false);
   const onChange = (event) => {
     setAmount(event.target.value);
   };
@@ -18,29 +18,29 @@ function App() {
       <div>
         <label htmlFor="minutes">Minutes</label>
         <input
-          value={flipped ? amount * 60 : amount}
+          value={inverted ? amount * 60 : amount}
           id="minutes"
           placeholder="Minutes"
           type="number"
           onChange={onChange}
           // disabled={flipped === true}
-          disabled={flipped}
+          disabled={inverted}
         />
       </div>
       <div>
         <label htmlFor="hours">Hours</label>
         <input
-          value={flipped ? amount : Math.round(amount / 60)}
+          value={inverted ? amount : Math.round(amount / 60)}
           id="hours"
           placeholder="Hours"
           type="number"
           // disabled={flipped === false}
-          disabled={!flipped}
+          disabled={!inverted}
           onChange={onChange}
         />
       </div>
       <button onClick={reset}>Reset</button>
-      <button onClick={onFlip}>Flip</button>
+      <button onClick={onFlip}>{inverted ? "Turn back" : "Invert"}</button>
     </div>
   );
 }
