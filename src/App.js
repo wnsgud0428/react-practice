@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function App() {
+function MinutesToHours() {
   const [amount, setAmount] = useState(0);
   const [inverted, setFlipped] = useState(false);
   const onChange = (event) => {
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div>
-      <h1>Super Converter</h1>
+      <h3>Min 2 Hour</h3>
       <div>
         <label htmlFor="minutes">Minutes</label>
         <input
@@ -41,6 +41,36 @@ function App() {
       </div>
       <button onClick={reset}>Reset</button>
       <button onClick={onFlip}>{inverted ? "Turn back" : "Invert"}</button>
+    </div>
+  );
+}
+
+function KmToMiles() {
+  return (
+    <div>
+      <h2>KM 2 MILES</h2>
+    </div>
+  );
+}
+
+function App() {
+  const [index, setIndex] = useState("xx");
+  const onSelect = (event) => {
+    setIndex(event.target.value);
+  };
+
+  return (
+    <div>
+      <h1>Super Converter</h1>
+      <select value={index} onChange={onSelect}>
+        <option value="xx">Select your units</option>
+        <option value="0">Minutes & Hours</option>
+        <option value="1">Km & Miles</option>
+      </select>
+      <hr />
+      {index === "xx" ? "Please select your units" : null}
+      {index === "0" ? <MinutesToHours /> : null}
+      {index === "1" ? <KmToMiles /> : null}
     </div>
   );
 }
