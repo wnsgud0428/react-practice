@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
-function Btn({ btnName, big }) {
-  console.log(btnName, big);
+function Btn({ btnName, onClick }) {
+  console.log(btnName + "was renderd");
   return (
     <button
+      onClick={onClick}
       style={{
         backgroundColor: "tomato",
         color: "white",
         padding: "10px 20px",
         border: 0,
         borderRadius: 10,
-        fontSize: big ? 18 : 16,
       }}
     >
       {btnName}
@@ -18,11 +18,15 @@ function Btn({ btnName, big }) {
   );
 }
 
+const MemorizedBtn = memo(Btn);
 function App() {
+  const [value, setValue] = useState("save Changes");
+  const changeValue = () => setValue("Revert Changes");
+
   return (
     <div>
-      <Btn btnName="Save" big={true} />
-      <Btn btnName="Confirm" big={false} />
+      <MemorizedBtn btnName={value} onClick={changeValue} />
+      <MemorizedBtn btnName="Confirm" />
     </div>
   );
 }
